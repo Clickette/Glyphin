@@ -1,14 +1,17 @@
 [
     {
         "name": "echo",
-        "description": "Repeats the message you send"
+        "description": "Repeats the message you send",
+        "category": "Debug"
     },
     {
         "name": "womp",
-        "description": "womp womp"
+        "description": "womp womp",
+        "category": "Debug"
     },
     {
         "name": "help",
-        "description": "Displays a list of commands"
+        "description": "Displays a list of commands",
+        "category": "Info"
     }
 ]
