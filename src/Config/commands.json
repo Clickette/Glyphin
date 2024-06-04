@@ -1,0 +1,14 @@
+[
+    {
+        "name": "echo",
+        "description": "Repeats the message you send"
+    },
+    {
+        "name": "womp",
+        "description": "womp womp"
+    },
+    {
+        "name": "help",
+        "description": "Displays a list of commands"
+    }
+]
