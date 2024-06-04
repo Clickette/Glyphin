@@ -1,0 +1,14 @@
+{
+  "name": "glyphin",
+  "version": "1.0.0",
+  "description": "competition thing fr",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team Clickette",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "eris": "^0.17.2"
+  }
+}
