@@ -4,7 +4,7 @@ const path = require('path');
 const Logger = require('./Utilities/Logger.js');
 const { token, clientid, guildid } = require('./Config/config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 client.slashCommands = new Collection();
 client.messageCommands = new Collection();
@@ -25,13 +25,17 @@ const loadEvents = (eventFiles) => {
     }
 };
 
-const loadCommands = (commandFolder, collection) => {
-    for (const folder of commandFolder) {
-        const commandFiles = loadFiles(path.join(__dirname, `Commands/Message/${folder}`), '.js');
+const loadCommands = (commandFolders, commandType) => {
+    for (const folder of commandFolders) {
+        const commandFiles = loadFiles(path.join(__dirname, `Commands/${commandType}/${folder}`), '.js');
         for (const file of commandFiles) {
-            Logger.info(`Loading ${collection === client.messageCommands ? 'message' : 'slash'} command: ${file}`);
-            const command = require(`./Commands/Message/${folder}/${file}`);
-            collection.set(command.name, command);
+            Logger.info(`Loading ${commandType.toLowerCase()} command: ${file}`);
+            const command = require(`./Commands/${commandType}/${folder}/${file}`);
+            if (commandType === 'Message') {
+                client.messageCommands.set(command.name, command);
+            } else {
+                client.slashCommands.set(command.data.name, command);
+            }
         }
     }
 };
@@ -41,16 +45,8 @@ const messageCommandFolders = fs.readdirSync(path.join(__dirname, 'Commands/Mess
 const slashCommandFolders = fs.readdirSync(path.join(__dirname, 'Commands/Slash'));
 
 loadEvents(eventFiles);
-loadCommands(messageCommandFolders, client.messageCommands);
-
-for (const module of slashCommandFolders) {
-    const slashCommandFiles = loadFiles(path.join(__dirname, `Commands/Slash/${module}`), '.js');
-    for (const file of slashCommandFiles) {
-        Logger.info(`Loading slash command: ${file}`);
-        const command = require(`./Commands/Slash/${module}/${file}`);
-        client.slashCommands.set(command.data.name, command);
-    }
-}
+loadCommands(messageCommandFolders, 'Message');
+loadCommands(slashCommandFolders, 'Slash');
 
 const rest = new REST({ version: '9' }).setToken(token);
 const slashCommands = client.slashCommands.map((command) => command.data.toJSON());
