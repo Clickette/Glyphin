@@ -11,7 +11,6 @@
   "dependencies": {
     "chalk": "4.1.2",
     "discord.js": "^14.15.3",
-    "eris": "^0.17.2",
     "fancy-time": "^1.0.6"
   }
 }

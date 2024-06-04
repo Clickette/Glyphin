@@ -14,9 +14,6 @@ importers:
       discord.js:
         specifier: ^14.15.3
         version: 14.15.3
-      eris:
-        specifier: ^0.17.2
-        version: 0.17.2
       fancy-time:
         specifier: ^1.0.6
         version: 1.0.6
@@ -222,10 +219,6 @@ packages:
     resolution: {integrity: sha512-dwDPwZL0dmye8Txp2gzFmA6sxALaSvdRDjPH0viLcKrtlOL3tw62nWWweVD1SdILDTJrbrL6tdWVN58Wo6U3eA==}
     engines: {node: '>=10.13.0'}
 
-  eris@0.17.2:
-    resolution: {integrity: sha512-OzffDSL81VooFXfRn56ienSg7J6fagoN8WdkmCHjn0B9a4jUA3bVouMztQiaXT54jHV5jaX9D0mJ/b9/0mFoVg==}
-    engines: {node: '>=10.4.0'}
-
   es-module-lexer@1.5.3:
     resolution: {integrity: sha512-i1gCgmR9dCl6Vil6UKPI/trA69s08g/syhiDK9TG0Nf1RJjjFI+AzoWW7sPufzkgYAn861skuCwJa0pIIHYxvg==}
 
@@ -312,9 +305,6 @@ packages:
   node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
 
-  opusscript@0.0.8:
-    resolution: {integrity: sha512-VSTi1aWFuCkRCVq+tx/BQ5q9fMnQ9pVZ3JU4UHKqTkf0ED3fKEPdr+gKAAl3IA2hj9rrP6iyq3hlcJq3HELtNQ==}
-
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
@@ -380,9 +370,6 @@ packages:
 
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-
-  tweetnacl@1.0.3:
-    resolution: {integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==}
 
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
@@ -688,16 +675,6 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.1
 
-  eris@0.17.2:
-    dependencies:
-      ws: 8.17.0
-    optionalDependencies:
-      opusscript: 0.0.8
-      tweetnacl: 1.0.3
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-
   es-module-lexer@1.5.3: {}
 
   escalade@3.1.2: {}
@@ -766,9 +743,6 @@ snapshots:
 
   node-releases@2.0.14: {}
 
-  opusscript@0.0.8:
-    optional: true
-
   picocolors@1.0.1: {}
 
   punycode@2.3.1: {}
@@ -825,9 +799,6 @@ snapshots:
   ts-mixer@6.0.4: {}
 
   tslib@2.6.2: {}
-
-  tweetnacl@1.0.3:
-    optional: true
 
   undici-types@5.26.5: {}
 
