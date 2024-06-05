@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { Embed } = require('../../../Utilities/Embed');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -6,16 +7,15 @@ module.exports = {
         .setDescription('Get the invite link for the bot.'),
     async execute(interaction) {
         const inviteLink = 'https://discord.com/oauth2/authorize?client_id=1247596819987300476&permissions=8&scope=applications.commands+bot';
-        const supportServerLink = 'https://dsc.gg/glyph'; // Replace with your support server invite link
-        const websiteLink = 'https://glyphlabs.github.io'; // Replace with your GitHub repository link
+        const supportServerLink = 'https://dsc.gg/glyph';
+        const websiteLink = 'https://glyphlabs.github.io';
 
-        const embed = new EmbedBuilder()
-            .setColor('#F8C822') // Custom yellow color
+        const embed = new Embed()
             .setTitle('Invite Glyph')
             .addFields([
                 { name: 'About Glyph', value: 'A Powerful, Open-Source and Incredibly simple to use Discord bot for most of your needs.' }
             ])
-            .setImage("https://media.discordapp.net/attachments/1247588047831437435/1247641355933581322/glyphin_embed_small.png?ex=6660c40f&is=665f728f&hm=6d2acb0014177fe245b90289be05e5dccf6aa48a299f66923079f04b0102c77f&=&format=webp&quality=lossless");
+            .setImage("https://clickette.net/u/rK9qrh.webp");
 
         const row = new ActionRowBuilder()
             .addComponents(
