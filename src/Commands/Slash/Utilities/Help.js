@@ -1,46 +1,41 @@
+const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { Embed } = require('../../../Utilities/Embed');
+const Logger = require('../../../Utilities/Logger');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('help')
-        .setDescription('Displays a list of commands'),
-    async execute(interaction) {
-        // Read the commands file
-        fs.readFile(path.join(__dirname, '../../../Config/commands.json'), 'utf8', (err, data) => {
-            if (err) {
-                console.error(err);
-                return;
+	data: new SlashCommandBuilder()
+		.setName('help')
+		.setDescription('Displays all available commands.'),
+	async execute(interaction) {
+        const categoriesDir = path.join(__dirname, '../../../Commands/Slash');
+        const categories = fs.readdirSync(categoriesDir);
+
+        const embed = new Embed()
+            .setTitle('Here are the available commands!')
+            .setImage("https://clickette.net/u/rK9qrh.webp");
+
+        categories.forEach(category => {
+            const commandFiles = fs.readdirSync(path.join(categoriesDir, category)).filter(file => file.endsWith('.js'));
+            const capitalise = category.charAt(0).toUpperCase() + category.slice(1);
+
+            try {
+                const commands = commandFiles.map(file => {
+                    const command = require(path.join(categoriesDir, category, file));
+                    return command.data.name;
+                });
+
+                embed.addFields({ 
+                    name: `・${capitalise} [${commands.length}]:`, 
+                    value: commands.map(name => '`' + name + '`').join(", "), 
+                    inline: false 
+                });
+            } catch (error) {
+                Logger.error(error);
             }
-
-            // Parse the JSON
-            const commands = JSON.parse(data);
-
-            // Group the commands by category
-            const categories = {};
-            for (const command of commands) {
-                if (!categories[command.category]) {
-                    categories[command.category] = '';
-                }
-                categories[command.category] += `**${command.name}**: ${command.description}\n`;
-            }
-
-            // Create an embed message using EmbedBuilder
-            const embed = new EmbedBuilder()
-                .setColor('F8C923')
-                .setTitle('Available Commands')
-                .setImage("https://clickette.net/u/rK9qrh.webp");
-
-            // Add a new field for each category
-            for (const category in categories) {
-                embed.addFields([
-                    { name: category, value: categories[category] }
-                ]);
-            }
-
-            // Send the embed message
-            interaction.reply({ embeds: [embed] });
         });
-    },
+
+        await interaction.reply({ embeds: [embed] });
+	},
 };
