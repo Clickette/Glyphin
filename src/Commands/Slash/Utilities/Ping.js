@@ -1,12 +1,26 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { Embed } = require('../../../Utilities/Embed');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong! And shows the latency.'),
-    async execute(interaction) {
-        const sent = await interaction.reply({ content: '*Ping...*', fetchReply: true });
-        const latency = sent.createdTimestamp - interaction.createdTimestamp;
-        await interaction.editReply(`**Pong!** Latency is ${latency}ms`);
-    },
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Displays the bot\'s and API\'s latency.'),
+	async execute(interaction) {
+        const embed = new Embed()
+        .setTitle('Pong!')
+        .addFields(
+            {
+              name: "🤖 • Bot Latency",
+              value: `\`${Date.now() - interaction.createdTimestamp}ms\``,
+              inline: true
+            },
+            {
+              name: "💻 • API Latency",
+              value: `\`${Math.round(interaction.client.ws.ping)}ms\``,
+              inline: true
+            },
+        );
+
+        await interaction.reply({ embeds: [embed] });
+	},
 };
