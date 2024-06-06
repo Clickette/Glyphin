@@ -11,6 +11,7 @@
   "dependencies": {
     "chalk": "4.1.2",
     "discord.js": "^14.15.3",
-    "fancy-time": "^1.0.6"
+    "fancy-time": "^1.0.6",
+    "sqlite3": "^5.1.7"
   }
 }
