@@ -1,4 +1,4 @@
-const { REST, Client, Collection, GatewayIntentBits, Routes } = require('discord.js');
+const { REST, Client, Collection, GatewayIntentBits, ActivityType, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const Logger = require('./Utilities/Logger.js');
@@ -10,6 +10,10 @@ const client = new Client({
         GatewayIntentBits.GuildMessages, 
         GatewayIntentBits.MessageContent 
     ]
+});
+
+client.once('ready', async () => {
+    client.user.setActivity('for /help', { type: ActivityType.Watching });
 });
 
 client.slashCommands = new Collection();
