@@ -5,7 +5,7 @@ function Embed() {
     const embed = new EmbedBuilder()
         .setColor('#F8C822')
         .setFooter({
-            text: `Glyph - v${version}`,
+            text: `Glyphin - v${version}`,
             iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
         })
         .setTimestamp()

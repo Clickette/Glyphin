@@ -1,6 +1,6 @@
 {
   "name": "glyphin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "competition thing fr",
   "main": "src/Glyphin.js",
   "scripts": {
