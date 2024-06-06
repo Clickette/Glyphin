@@ -28,4 +28,4 @@ Developer & Lead Designer
 
 ##### [CLAY](https://github.com/claytontdm)
 
-Developer & Designer
+Developer
