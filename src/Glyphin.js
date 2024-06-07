@@ -1,8 +1,10 @@
-const { REST, Client, Collection, GatewayIntentBits, ActivityType, Routes } = require('discord.js');
+require('module-alias/register');
+
+const { REST, Client, Collection, GatewayIntentBits, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const Logger = require('./Utilities/Logger.js');
-const { token, clientid, guildid } = require('./Config/config.json');
+const Logger = require('@utils/Logger');
+const { token, clientid, guildid } = require('@config/config.json');
 
 const client = new Client({ 
     intents: [
@@ -10,10 +12,6 @@ const client = new Client({
         GatewayIntentBits.GuildMessages, 
         GatewayIntentBits.MessageContent 
     ]
-});
-
-client.once('ready', async () => {
-    client.user.setActivity('for /help', { type: ActivityType.Watching });
 });
 
 client.slashCommands = new Collection();
