@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
-const { Embed } = require('../../../Utilities/Embed');
-const Logger = require('../../../Utilities/Logger');
+const { Embed } = require('@utils/Embed');
+const Logger = require('@utils/Logger');
 
 module.exports = {
 	data: new SlashCommandBuilder()
