@@ -1,6 +1,6 @@
 const { Collection, ChannelType, Events } = require("discord.js");
-const { prefix, owner } = require('../Config/config.json');
-const Logger = require("../Utilities/Logger");
+const { prefix, owner } = require('@config/config.json');
+const Logger = require("@utils/Logger");
 
 const escapeRegex = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
