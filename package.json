@@ -8,7 +8,8 @@
   },
   "_moduleAliases": {
     "@utils": "src/Utilities",
-    "@db": "src/Databse"
+    "@db": "src/Databse",
+    "@config": "src/Config"
   },
   "author": "Team Clickette",
   "license": "SEE LICENSE IN LICENSE",
