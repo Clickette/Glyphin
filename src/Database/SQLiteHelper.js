@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
-const Logger = require('../Utilities/Logger');
+const Logger = require('@utils/Logger');
 
 // very cool db helper :DDDDD
 // shout out to chatgpt for writng the jsdocs (i am too lazy)
