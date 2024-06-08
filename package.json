@@ -8,7 +8,7 @@
   },
   "_moduleAliases": {
     "@utils": "src/Utilities",
-    "@db": "src/Databse",
+    "@db": "src/Database",
     "@config": "src/Config"
   },
   "author": "Team Clickette",
