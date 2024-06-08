@@ -13,3 +13,4 @@ module.exports = {
         await interaction.reply({ content: input });
     },
 };
+// for later pls lock this to config user ids

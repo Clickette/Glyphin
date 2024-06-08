@@ -27,7 +27,7 @@ module.exports = {
                 });
 
                 embed.addFields({ 
-                    name: `・${capitalise} [${commands.length}]:`, 
+                    name: `<:arrowpoint:1248125837379768370> ${capitalise} [${commands.length}]:`, 
                     value: commands.map(name => '`' + name + '`').join(", "), 
                     inline: false 
                 });
