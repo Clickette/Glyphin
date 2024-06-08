@@ -69,6 +69,6 @@ module.exports = {
             VALUES (?, ?, ?, ?, ?, ?)`,
             [serverId, 'kick', member.user.id, timestamp, reason, message.author.id]
         ).catch(err => Logger.error(`Error logging punishment: ${err.message}`));
-        await message.channel.send({ embeds: [embed] });
+        await message.channel.reply({ embeds: [embed] });
 	},
 };
