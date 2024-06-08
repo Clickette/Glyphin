@@ -25,8 +25,10 @@ function Embed() {
 function ErrorEmbed() {
     const embed = new EmbedBuilder()
         .setColor('#f80d22')
-        .setAuthor('Uh Oh!', 'https://cdn.discordapp.com/attachments/1247596819987300476/1247612492491930368/unknown.png')
-        .setTitle('Something went wrong!')
+        .setAuthor({
+            name: "Uh Oh!",
+            iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+        })
         .setFooter({
             text: `Glyphin - v${version}`,
             iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
