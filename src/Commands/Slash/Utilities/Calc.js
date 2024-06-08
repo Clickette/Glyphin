@@ -6,8 +6,8 @@ module.exports = {
         .setDescription('A simple calculator using buttons.'),
     async execute(interaction) {
         const calculatorButtons = [
-            ['7', '8', '9', '/'],
-            ['4', '5', '6', '*'],
+            ['7', '8', '9', '÷'],
+            ['4', '5', '6', '✖️'],
             ['1', '2', '3', '-'],
             ['0', '.', '=', '+'],
             ['C']
