@@ -38,6 +38,7 @@ module.exports = {
 
             const replyMessage = await message.reply({ embeds: [errEmbed] });
                 setTimeout(() => {
+		    message.delete().catch(Logger.error);
                     replyMessage.delete().catch(Logger.error);
             }, 7500);
             return;
@@ -49,6 +50,7 @@ module.exports = {
 
             const replyMessage = await message.reply({ embeds: [errEmbed] });
                 setTimeout(() => {
+		    message.delete().catch(Logger.error);
                     replyMessage.delete().catch(Logger.error);
             }, 7500);
             return;
@@ -67,6 +69,6 @@ module.exports = {
             VALUES (?, ?, ?, ?, ?, ?)`,
             [serverId, 'ban', member.user.id, timestamp, reason, message.author.id]
         ).catch(err => Logger.error(`Error logging punishment: ${err.message}`));
-        await message.channel.send({ embeds: [embed] });
+        await message.channel.reply({ embeds: [embed] });
 	},
 };
