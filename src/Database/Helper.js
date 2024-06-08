@@ -5,9 +5,9 @@ const Logger = require('@utils/Logger');
 
 // very cool db helper :DDDDD
 // shout out to chatgpt for writng the jsdocs (i am too lazy)
-class SQLiteHelper {
+class Helper {
     /**
-     * Creates an instance of SQLiteHelper.
+     * Creates an instance of Helper.
      * 
      * @param {string} dbPath - The path to the SQLite database file.
      */
@@ -156,7 +156,7 @@ class SQLiteHelper {
             fs.mkdirSync(dbDir, { recursive: true });
         }
 
-        const dbPath = path.join(dbDir, `${dbName}.sqlite`);
+        const dbPath = path.join(dbDir, `${dbName}.db`);
         const db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
                 Logger.error(`Error creating database: ${err.message}`);
@@ -265,4 +265,4 @@ class SQLiteHelper {
     }
 }
 
-module.exports = SQLiteHelper;
+module.exports = Helper;
