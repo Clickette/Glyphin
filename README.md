@@ -30,7 +30,7 @@ Developer & Lead Designer
 
 Developer
 
-<img align="left" src="https://avatars.githubusercontent.com/u/116967343?v=4">
+<img align="left" src="https://avatars.githubusercontent.com/u/116967343?s=70">
 
 ##### [ONION](https://github.com/roblnet13)
 
