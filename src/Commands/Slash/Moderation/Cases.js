@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { Embed, ErrorEmbed } = require('@utils/Embed');
+const { version } = require('../../../../package.json');
+
 const Logger = require('@utils/Logger');
 const Helper = require('@db/Helper');
 const path = require('path');
@@ -26,7 +28,7 @@ module.exports = {
         await interaction.deferReply();
         const user = interaction.options.getUser('user');
         let page = interaction.options.getInteger('page') || 1;
-        const limit = 5; // Number of cases to display per page
+        const limit = 3; // Number of cases to display per page
         const offset = (page - 1) * limit;
 
         try {
@@ -56,8 +58,8 @@ module.exports = {
             for (const punishment of cases) {
                 const formattedTimestamp = new Date(punishment.timestamp).toLocaleString();
                 const caseField = {
-                    name: `Case ID: ${punishment.id}`,
-                    value: `Punishment: ${punishment.punishment}\nUser ID: ${punishment.user_id}\nReason: ${punishment.reason}\nModerator: <@${punishment.moderator_id}>\nTimestamp: ${formattedTimestamp}`,
+                    name: `<:arrowpoint:1248125837379768370> Case ID: ${punishment.id}`,
+                    value: `Punishment: ${punishment.punishment}\nUser: <@${punishment.user_id}>\nReason: ${punishment.reason}\nModerator: <@${punishment.moderator_id}>\nTimestamp: ${formattedTimestamp}`,
                     inline: false
                 };
                 caseChunks.push(caseField);
@@ -66,7 +68,11 @@ module.exports = {
             const embed = new Embed()
                 .setTitle('Punishment Cases')
                 .setTimestamp()
-                .addFields(...caseChunks);
+                .addFields(...caseChunks)
+                .setFooter({
+                    text: `Glyphin - v${version} - Time in IST`,
+                    iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                });
             embeds.push(embed.toJSON());
 
             const maxPages = Math.ceil(totalCases / limit);
@@ -109,7 +115,7 @@ module.exports = {
                 for (const punishment of cases) {
                     const formattedTimestamp = new Date(punishment.timestamp).toLocaleString();
                     const caseField = {
-                        name: `Case ID: ${punishment.id}`,
+                        name: `<:arrowpoint:1248125837379768370> Case ID: ${punishment.id}`,
                         value: `Punishment: ${punishment.punishment}\nUser ID: ${punishment.user_id}\nReason: ${punishment.reason}\nModerator: <@${punishment.moderator_id}>\nTimestamp: ${formattedTimestamp}`,
                         inline: false
                     };
@@ -119,7 +125,11 @@ module.exports = {
                 const embed = new Embed()
                     .setTitle('Punishment Cases')
                     .setTimestamp()
-                    .addFields(...caseChunks);
+                    .addFields(...caseChunks)
+                    .setFooter({
+                        text: `Glyphin - v${version} - Time in IST`,
+                        iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                    });
                 embeds[0] = embed.toJSON();
 
                 prevButton.setDisabled(page === 1);
