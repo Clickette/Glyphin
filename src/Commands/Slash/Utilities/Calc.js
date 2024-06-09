@@ -7,10 +7,10 @@ module.exports = {
     async execute(interaction) {
         const calculatorButtons = [
             ['7', '8', '9', '÷'],
-            ['4', '5', '6', '✖️'],
+            ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', '=', '+'],
-            ['C']
+            ['Clear']
         ];
 
         const rows = calculatorButtons.map(row => {
@@ -39,27 +39,43 @@ module.exports = {
 
             const buttonId = i.customId;
 
-            if (buttonId === 'C') {
+            if (buttonId === 'Clear') {
                 currentExpression = '';
                 display = '0';
             } else if (buttonId === '=') {
                 try {
-                    currentExpression = eval(currentExpression).toString();
+                    if (currentExpression.includes('/0')) {
+                        throw new Error('division by zero');
+                    }
+                    currentExpression = eval(currentExpression.replace('÷', '/')).toString();
                     display = currentExpression;
                 } catch (error) {
-                    currentExpression = '';
-                    display = 'Error';
+                    if (error.message === 'division by zero') {
+                        currentExpression = '';
+                        display = 'Why are you even trying to divide by zero?';
+                    } else {
+                        currentExpression = '';
+                        display = 'Error';
+                    }
                 }
             } else {
-                currentExpression += buttonId;
+                if (currentExpression === '0') {
+                    currentExpression = buttonId;
+                } else {
+                    currentExpression += buttonId;
+                }
                 display = currentExpression;
             }
 
-            await i.update({ content: `\`\`\`${display}\`\`\`` });
+            await i.update({ content: `\`\`\`${display}\`\`\``, components: rows });
         });
 
         collector.on('end', async () => {
-            await interaction.editReply({ components: [] });
+            try {
+                await interaction.editReply({ components: [] });
+            } catch (error) {
+                console.error('Failed to edit reply after collector ended:', error);
+            }
         });
     },
 };
