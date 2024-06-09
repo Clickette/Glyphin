@@ -117,7 +117,7 @@ module.exports = {
                     const formattedTimestamp = new Date(punishment.timestamp).toLocaleString();
                     const caseField = {
                         name: `<:arrowpoint:1248125837379768370> Case ID: ${punishment.id}`,
-                        value: `Punishment: ${punishment.punishment}\nUser ID: ${punishment.user_id}\nReason: ${punishment.reason}\nModerator: <@${punishment.moderator_id}>\nTimestamp: ${formattedTimestamp}`,
+                        value: `Punishment: ${punishment.punishment}\nUser: <@${punishment.user_id}>\nReason: ${punishment.reason}\nModerator: <@${punishment.moderator_id}>\nTimestamp: ${formattedTimestamp}`,
                         inline: false
                     };
                     caseChunks.push(caseField);

@@ -13,7 +13,9 @@ module.exports = {
         const embed = new Embed()
             .setTitle('Invite Glyph')
             .addFields([
-                { name: 'About Glyph', value: 'A Powerful, Open-Source and Incredibly simple to use Discord bot for most of your needs.' }
+                { name: 'About Glyph', value: 'A Powerful, Open-Source and Incredibly simple to use Discord bot for most of your needs.' },
+                { name: 'Developers', value: '<@1244223146027122699> <@838197580462293042> <@722641444397121596>' },
+                { name: 'Special Thanks', value: '<@819525284230594570>\'s cat, Ginger! \`/ginger\`' }
             ])
             .setImage("https://clickette.net/u/rK9qrh.webp");
 

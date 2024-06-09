@@ -7,6 +7,18 @@ const path = require('path');
 const dbPath = path.join(__dirname, '../../../Database/Databases/punishments.db');
 const db = new Helper(dbPath);
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        server_id TEXT NOT NULL,
+        punishment TEXT NOT NULL,
+        user_id TEXT NOT NULL,
+        timestamp TEXT NOT NULL,
+        reason TEXT,
+        moderator_id TEXT NOT NULL
+    )
+`).catch(err => Logger.error(`Error creating table: ${err.message}`));
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ban')
