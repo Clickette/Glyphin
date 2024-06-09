@@ -1,5 +1,6 @@
-const { Collection, ChannelType, Events } = require("discord.js");
-const { prefix, owner } = require('@config/config.json');
+const { EmbedBuilder, Collection, ChannelType, Events } = require("discord.js");
+const { prefix, devids } = require('@config/config.json');
+const { version } = require('../../package.json');
 const Logger = require("@utils/Logger");
 
 const escapeRegex = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -24,23 +25,46 @@ module.exports = {
         const args = content.slice(matchedPrefix.length).trim().split(/\s+/);
         const commandName = args.shift().toLowerCase();
 
-        const command = client.messageCommands.get(commandName) || 
-                        client.messageCommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+        const command = client.messageCommands.get(commandName) ||
+                client.messageCommands.find(cmd => cmd.aliases?.includes(commandName));
 
         if (!command) return;
 
-        if (command.ownerOnly && author.id !== owner) {
-            return message.reply({ content: "This is an owner-only command!" });
+        if (command.ownerOnly && !devids.includes(author.id)) {
+            const replyMessage = await message.reply({ content: "This command has been disabled by the developers." });
+            setTimeout(() => {
+                message.delete().catch(Logger.error);
+                replyMessage.delete().catch(Logger.error);
+            }, 7500);
+            return;
         }
 
         if (command.guildOnly && message.channel.type === ChannelType.DM) {
             return message.reply({ content: "I can't execute that command inside DMs!" });
         }
 
+        const permError = new EmbedBuilder()
+            .setColor('#f80d22')
+            .setAuthor({
+                name: "Uh Oh!",
+                iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+            })
+            .setTitle('You do not have permission to use this command!')
+            .setFooter({
+                text: `Glyphin - v${version}`,
+                iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+            })
+            .setTimestamp()
+
         if (command.permissions && message.channel.type !== ChannelType.DM) {
             const authorPerms = message.channel.permissionsFor(author);
-            if (!authorPerms || !authorPerms.has(command.permissions)) {
-                return message.reply({ content: "You do not have permission to execute this command!" });
+            if (!authorPerms?.has(command.permissions)) {
+                const replyMessage = await message.reply({ embeds: [permError] });
+                setTimeout(() => {
+                    message.delete().catch(Logger.error);
+                    replyMessage.delete().catch(Logger.error);
+                }, 7500);
+                return;
             }
         }
 
@@ -62,7 +86,26 @@ module.exports = {
             const expirationTime = timestamps.get(author.id) + cooldownAmount;
             if (now < expirationTime) {
                 const timeLeft = (expirationTime - now) / 1000;
-                return message.reply({ content: `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.` });
+
+                const cooldownError = new EmbedBuilder()
+                    .setColor('#f80d22')
+                    .setAuthor({
+                        name: "Uh Oh!",
+                        iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                    })
+                    .setTitle(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the ${command.name} command!`)
+                    .setFooter({
+                        text: `Glyphin - v${version}`,
+                        iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                    })
+                    .setTimestamp()
+
+                const replyMessage = await message.reply({ embeds: [cooldownError] });
+                setTimeout(() => {
+                    message.delete().catch(Logger.error);
+                    replyMessage.delete().catch(Logger.error);
+                }, 10000);
+                return;
             }
         }
 
@@ -72,8 +115,26 @@ module.exports = {
         try {
             await command.execute(message, args);
         } catch (error) {
-            Logger.error(error);
-            message.reply({ content: "An error occurred while attempting to execute this command! Please report this to the developers." });
+            const genericError = new EmbedBuilder()
+                .setColor('#f80d22')
+                .setAuthor({
+                    name: "Uh Oh!",
+                    iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                })
+                .setTitle('An error occurred while attempting to execute this command!')
+                .setDescription(`Please report this to the developers!\n\n<:line:1248940390589923328> Command : (\`${command.name}\`)\n<:line:1248940390589923328> Error : \`\`\`${error}\`\`\``)
+                .setFooter({
+                    text: `Glyphin - v${version}`,
+                    iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
+                })
+            .setTimestamp()
+
+            Logger.log(error);
+            const replyMessage = await message.reply({ embeds: [genericError] });
+            setTimeout(() => {
+                message.delete().catch(Logger.error);
+                replyMessage.delete().catch(Logger.error);
+            }, 15000);
         }
     },
 };
