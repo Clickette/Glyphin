@@ -7,6 +7,7 @@ const Helper = require('@db/Helper');
 const path = require('path');
 const dbPath = path.join(__dirname, '../../../Database/Databases/punishments.db');
 const db = new Helper(dbPath);
+const timezone = "IST" // Put your server's local timezone in here
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -70,7 +71,7 @@ module.exports = {
                 .setTimestamp()
                 .addFields(...caseChunks)
                 .setFooter({
-                    text: `Glyphin - v${version} - Time in IST`,
+                    text: `Glyphin - v${version} - Time in ${timezone}`,
                     iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
                 });
             embeds.push(embed.toJSON());
@@ -127,7 +128,7 @@ module.exports = {
                     .setTimestamp()
                     .addFields(...caseChunks)
                     .setFooter({
-                        text: `Glyphin - v${version} - Time in IST`,
+                        text: `Glyphin - v${version} - Time in ${timezone}`,
                         iconURL: "https://cdn.discordapp.com/avatars/1247596819987300476/454d909eb9f0d11b670adb7a80a2b64e.webp?size=4096",
                     });
                 embeds[0] = embed.toJSON();
