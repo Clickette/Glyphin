@@ -1,6 +1,6 @@
 require('module-alias/register');
 
-const { REST, Client, Collection, GatewayIntentBits, Routes } = require('discord.js');
+const { REST, Client, Collection, GatewayIntentBits, Routes, EmbedBuilder, ButtonBuilder, } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const Logger = require('@utils/Logger');
@@ -110,5 +110,6 @@ const slashCommands = client.slashCommands.map((command) => command.data.toJSON(
         Logger.error(error);
     }
 })();
+
 
 client.login(token);
