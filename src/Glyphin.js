@@ -1,16 +1,19 @@
 require('module-alias/register');
 
-const { REST, Client, Collection, GatewayIntentBits, Routes, EmbedBuilder, ButtonBuilder, } = require('discord.js');
+const { REST, Client, Collection, GatewayIntentBits, Routes, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const Logger = require('@utils/Logger');
 const { token, clientid, guildid } = require('@config/config.json');
+const schedule = require('node-schedule');
+const Helper = require('@db/Helper');
+const fetch = require('node-fetch');
 
-const client = new Client({ 
+const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds, 
-        GatewayIntentBits.GuildMessages, 
-        GatewayIntentBits.MessageContent 
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
     ]
 });
 
@@ -111,5 +114,38 @@ const slashCommands = client.slashCommands.map((command) => command.data.toJSON(
     }
 })();
 
+
+// Initialize the database connection
+const dbPath = path.join(__dirname, 'Database/Databases/statuspage.db');
+const db = new Helper(dbPath);
+
+// Mapping of status codes to customizable text
+const statusTextMapping = {
+    OPERATIONAL: '<:online:1249701975960981525> Operational',
+    UNDERMAINTENANCE: '<:maintanence:1249701974132129903> Maintenance',
+    HASISSUES: '<:issues:1249701971703894018> Issues',
+    PARTIALOUTAGE: '<:minoroutage:1249701969443029084> Partial Outage',
+    MAJOROUTAGE: '<:majoroutage:1249701962526756998> Major Outage',
+    DEGRADEDPERFORMANCE: '<:degraded:1249705459288637460> Low Performance'
+    // Add more status codes and their corresponding text here if needed
+};
+
+// Function to get the status color based on the status code
+function getStatusColor(status) {
+    switch (status) {
+        case 'OPERATIONAL':
+            return '#00FF4C';
+        case 'UNDERMAINTENANCE':
+            return '#9C9C9C';
+        case 'HASISSUES':
+            return '#FFB806';
+        case 'PARTIALOUTAGE':
+            return '#FF5D06';
+        case 'MAJOROUTAGE':
+            return '#FF0000';
+        default:
+            return '#808080';
+    }
+}
 
 client.login(token);

@@ -3,6 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require(
 module.exports = {
     name: 'calc',
     description: 'A simple calculator using buttons.',
+    alias: 'calculator',
     cooldown: 5,
 
     async execute(message, args) {
