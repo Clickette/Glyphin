@@ -1,3 +1,8 @@
+const { Events } = require('discord.js');
+const Logger = require('@utils/Logger');
+const Helper = require('@db/Helper');
+const path = require('path');
+
 module.exports = {
     name: Events.GuildMemberAdd,
     
