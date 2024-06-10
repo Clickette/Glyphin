@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Logger = require('@utils/Logger');
 const { Embed, ErrorEmbed } = require('@utils/Embed');
 
