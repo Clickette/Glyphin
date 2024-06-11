@@ -15,11 +15,11 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "chalk": "4.1.2",
-    "child_process": "^1.0.2",
     "discord-gamecord": "^4.4.2",
     "discord.js": "^14.15.3",
     "fancy-time": "^1.0.6",
     "form-data": "^4.0.0",
+    "highlight.js": "^11.9.0",
     "module-alias": "^2.2.3",
     "node-fetch": "2.6.9",
     "node-schedule": "^2.1.1",
