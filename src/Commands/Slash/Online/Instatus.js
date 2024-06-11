@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { Embed, ErrorEmbed } = require('@utils/Embed');
 const Logger = require('@utils/Logger');
 const Helper = require('@db/Helper');
@@ -39,8 +39,8 @@ module.exports = {
     async execute(interaction) {
         const url = interaction.options.getString('url');
         const serverId = interaction.guild.id;
-        const componentsUrl = `${url}/v2/components.json`;
-        const summaryUrl = `${url}/summary.json`;
+        const componentsUrl = `${url}/v2/components.json?41224412`;
+        const summaryUrl = `${url}/summary.json?41224412`;
 
         try {
             const componentsResponse = await fetch(componentsUrl);

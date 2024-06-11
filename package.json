@@ -15,6 +15,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "chalk": "4.1.2",
+    "child_process": "^1.0.2",
     "discord-gamecord": "^4.4.2",
     "discord.js": "^14.15.3",
     "fancy-time": "^1.0.6",
